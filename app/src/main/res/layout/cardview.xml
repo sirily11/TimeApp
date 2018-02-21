@@ -23,7 +23,17 @@
 
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:background="@drawable/daytime" />
+                android:background="@drawable/daylight2" />
+
+            <ImageView
+
+                android:id="@+id/sun_or_moon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/sun" />
 
             <TextView
                 android:id="@+id/time"
@@ -52,9 +62,9 @@
                 android:shadowDy="3"
 
                 android:shadowRadius="2"
-                android:text="Chicago "
+                android:text="Chicago -9°C - 27°C "
                 android:textColor="@color/cardview_light_background"
-                android:textSize="38dp" />
+                android:textSize="34dp" />
 
         </RelativeLayout>
 
