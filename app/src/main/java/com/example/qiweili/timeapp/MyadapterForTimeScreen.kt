@@ -1,19 +1,24 @@
 package com.example.qiweili.timeapp
 
+import android.annotation.SuppressLint
+import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.example.qiweili.timeapp.timer.City
+import com.example.qiweili.timeapp.timer.clocker
 import kotlinx.android.synthetic.main.cardview.view.*
 
 /**
  * Created by qiweili on 2018/2/18.
  */
-class MyadapterForTimeScreen(time: clocker, cities: List<City>?) : RecyclerView.Adapter<TimeScreen.ViewHolder>() {
+class MyadapterForTimeScreen(time: List<clocker>, cities: List<City>?) : RecyclerView.Adapter<TimeScreen.ViewHolder>() {
 
     val time = time
     val cities = cities
+
     override fun getItemCount(): Int {
-        return 2;
+        return time.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): TimeScreen.ViewHolder {
@@ -22,56 +27,52 @@ class MyadapterForTimeScreen(time: clocker, cities: List<City>?) : RecyclerView.
         return TimeScreen.ViewHolder(cellForRow)
     }
 
+    //holder?.view?.cardview?.sun_or_moon?.setBackgroundResource(R.drawable.rain)
+    //cities?.get(position)?.weather?.get(0)?.returnWeather() == "Sun"
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: TimeScreen.ViewHolder?, position: Int) {
-        val chicago = time.time_chicago
-        val beijing = time.time_china
-        if (position == 0) {
-            holder?.view?.timezone?.text = "Ames ${cities?.get(position)?.main?.getMinHighTemp()}"
-            holder?.view?.time?.text = chicago
-            if (time.chicago_daytime) {
-                holder?.view?.cardview_background?.setBackgroundResource(R.drawable.daylight2)
-                if (cities?.get(position)?.weather?.get(0)?.returnWeather() == "Sun") {
-                    holder?.view?.cardview?.sun_or_moon?.setBackgroundResource(R.drawable.sun)
-                } else {
-                    holder?.view?.cardview?.sun_or_moon?.setBackgroundResource(R.drawable.rain)
-                }
+        val currentTime = time[position]
+        val currentWeather = cities?.get(position)?.weather?.get(0)?.returnWeather()
+        val currentTemp = cities?.get(position)?.main?.getMinHighTemp()
+        var weatherIcon = R.drawable.sun
+        val currentData = time.get(position).date
 
-            } else {
-                holder?.view?.cardview_background?.setBackgroundResource(R.drawable.night2)
-                if (cities?.get(position)?.weather?.get(0)?.returnWeather() == "Sun") {
-                    holder?.view?.cardview?.sun_or_moon?.setBackgroundResource(R.drawable.moon)
-                } else {
-                    holder?.view?.cardview?.sun_or_moon?.setBackgroundResource(R.drawable.rain)
-                }
-            }
-        } else {
-            holder?.view?.timezone?.text = "Shenzhen ${cities?.get(position)?.main?.getMinHighTemp()}"
-            holder?.view?.time?.text = beijing
-            if (time.china_daytime) {
-                holder?.view?.cardview_background?.setBackgroundResource(R.drawable.daylight1)
-                try {
-                    if (cities?.get(position)?.weather?.get(position)?.returnWeather() == "Sun") {
-                        holder?.view?.cardview?.sun_or_moon?.setBackgroundResource(R.drawable.sun)
-                    } else {
-                        holder?.view?.cardview?.sun_or_moon?.setBackgroundResource(R.drawable.rain)
-                    }
-                } catch (e: Exception) {
-                    println(e)
-                }
-            } else {
-                holder?.view?.cardview_background?.setBackgroundResource(R.drawable.night1)
-                try {
-                    if (cities?.get(position)?.weather?.get(0)?.returnWeather() == "Sun") {
-                        holder?.view?.cardview?.sun_or_moon?.setBackgroundResource(R.drawable.moon)
-                    } else {
-                        holder?.view?.cardview?.sun_or_moon?.setBackgroundResource(R.drawable.rain)
-                    }
-                } catch (e: Exception) {
-                    println(e)
-                }
-            }
+
+
+        /**
+         * Setting the country
+         */
+
+        holder?.view?.cardview?.timezone?.text = cities?.get(position)?.name + currentTemp
+        holder?.view?.cardview?.date?.text = currentData.toString()
+
+        /**
+         * Setting the clock
+         */
+
+        holder?.view?.cardview?.time?.text = currentTime.time
+        if(!currentTime.isSunrise()){
+            weatherIcon = R.drawable.sun
+            holder?.view?.cardview?.cardview_background?.setBackgroundResource(R.drawable.daylight3)
+
+        }else{
+            holder?.view?.cardview?.cardview_background?.setBackgroundResource(R.drawable.daylight3)
+            weatherIcon = R.drawable.moon
 
         }
+
+        /**
+         * setting the weather
+         */
+        if(currentWeather == "Sun") {
+            //holder?.view?.cardview?.sun_or_moon?.setBackgroundResource(weatherIcon)
+        }else{
+            //weatherIcon = R.drawable.rain
+            //holder?.view?.cardview?.sun_or_moon?.setBackgroundResource(weatherIcon)
+        }
+
+
+
 
     }
 }

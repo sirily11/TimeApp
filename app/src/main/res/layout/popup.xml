@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:elevation="10dp"
+    >
+
+    <TextView
+        android:id="@+id/Daylight_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignBaseline="@+id/checkBox"
+        android:layout_alignBottom="@+id/checkBox"
+        android:textColor="#000000"
+        android:hint="Daylight saving time"
+        android:textSize="15dp" />
+
+
+    <AutoCompleteTextView
+        android:id="@+id/cityName_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:layout_marginLeft="10dp"
+        android:hint="City's name(English only)"
+        android:inputType="textPersonName" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignStart="@+id/set"
+        android:layout_below="@+id/cityName_text"
+        android:layout_marginStart="13dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/set"
+        android:layout_alignBottom="@+id/set"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="17dp"
+        android:text="Cancel" />
+
+    <Button
+        android:id="@+id/set"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/Daylight_hint"
+        android:layout_below="@+id/checkBox"
+        android:layout_marginTop="15dp"
+        android:text="set"
+         />
+
+</RelativeLayout>
