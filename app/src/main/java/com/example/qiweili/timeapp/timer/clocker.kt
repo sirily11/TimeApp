@@ -4,7 +4,11 @@ import android.provider.ContactsContract
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-
+/**
+ * Create a clocker object which will have a sunrise and set's time
+ * It has a update method which can let the object get the latest
+ * time.
+ */
 class clocker(val timezone : String, private val sunrise: Int?, private val sunset: Int?) {
     private var country: TimeZone = TimeZone.getTimeZone(timezone)
     private var countryInstance = Calendar.getInstance(country)

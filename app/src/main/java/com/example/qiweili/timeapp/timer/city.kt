@@ -1,13 +1,15 @@
 package com.example.qiweili.timeapp.timer
 
 /**
- * Created by qiweili on 2018/2/21.
+ * list of city object which is the data get from the
+ * Openweather website. The data will be parse by gson
+ *
  */
-
 class listCities(val cnt : Int, val list : List<City>){
 
 }
-class City(val sys: sys, val weather: List<Weather>, val main: main, val name : String) {
+
+class City(val sys: sys?, val weather: List<Weather>?, val main: main?, val name : String?) {
     val sunrise_set = sys
     val cityname = name
 
